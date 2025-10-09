@@ -54,6 +54,8 @@ export const LoginForm = styled.form`
   min-height: 100vh;
   @media (max-width: 768px) {
     min-height: 110vh;
+    justify-content: "unset";
+    padding-top: "80px";
   }
 `;
 

@@ -10,110 +10,101 @@ import Generative_AI from "../Assets/images/Generative_AI.jpg";
 import AWS from "../Assets/images/AWS.jpg";
 import Spring from "../Assets/images/Spring.jpeg";
 import JEST from "../Assets/images/Jest.jpg";
+import NEXTJS from "../Assets/images/Next js.webp";
+import PROMT_ENG from "../Assets/images/promptengineering.webp";
 
-export const Courses = [
+const apikey = "AIzaSyBCHCqjPT5dn9x8M_PCEeoKSaLBu8CWRy4";
+
+const course = [
   {
-    id: 1,
     name: "JavaScript Data Structures and Algorithms",
     folderid: "1-2wSOzGPQg70IwFUnUnxnJk0apHCIgji",
-    apikey: "AIzaSyBCHCqjPT5dn9x8M_PCEeoKSaLBu8CWRy4",
     img: JavascriptDSA,
-    availability: true,
   },
   {
-    id: 2,
     name: "GCP Associate Cloud Engineer Certification Google Cloud",
     folderid: "1EHwKZmDBlpNLpzBgRPBQCLK_2Vofebwr",
-    apikey: "AIzaSyBCHCqjPT5dn9x8M_PCEeoKSaLBu8CWRy4",
     img: GCP,
-    availability: true,
   },
   {
-    id: 3,
     name: "Ultimate AWS Certified Developer Associate 2023 NEW DVA-C02",
     apikey: "AIzaSyDaRxfpcqNfs6aW4R0pE9F2ZyrV5HNKcG8",
     folderid: "1-0tW5h9dBooFzUFKwlxkJkM6KoyKUZrP",
     img: AWS,
-    availability: true,
   },
   {
-    id: 4,
     name: "Reactive Microservices with Spring WebFlux",
     folderid: "16hWqatHyuzWJD2oUIFzFkdmLpD2tAC8u",
-    apikey: "AIzaSyBCHCqjPT5dn9x8M_PCEeoKSaLBu8CWRy4",
     img: Spring,
-    availability: true,
   },
   {
-    id: 5,
     name: "Typescript & React JS Course with React & Typescript Project",
     folderid: "1PUDOFhC8EuQ__RonmUu0d_mtGhZSPeIz",
-    apikey: "AIzaSyBCHCqjPT5dn9x8M_PCEeoKSaLBu8CWRy4",
     img: React_TypeScript,
-    availability: true,
   },
   {
-    id: 6,
     name: "Understanding NPM - Node.js Package Manager",
     folderid: "1Oiz6iCUXdqAo15GVF37JwV7slj7tMNLZ",
-    apikey: "AIzaSyBCHCqjPT5dn9x8M_PCEeoKSaLBu8CWRy4",
     img: Node_Pack_Module,
-    availability: true,
   },
   {
-    id: 7,
+    name: "Next.js & React - The Complete Guide",
+    folderid: "1-20GymnKHjdJtz0dmomo8caG93COAJRO",
+    img: NEXTJS,
+  },
+  {
+    name: "Mastering Prompt Engineering for Chat GPT A Beginner's Guide",
+    folderid: "14zyDGrkSjWernWWT2ytETlABSz3uokEu",
+    img: PROMT_ENG,
+  },
+  {
     name: "React Testing Library and Jest: The Complete Guide",
     folderid: "195y-jUVjdWZhioG8ZsvBpfK_q45rJx6P",
-    apikey: "AIzaSyBCHCqjPT5dn9x8M_PCEeoKSaLBu8CWRy4",
     img: JEST,
-    availability: true,
   },
   {
-    id: 8,
     name: "Introduction to Machine Learning",
     folderid: "",
     apikey: "",
     img: Machine,
-    availability: false,
+    availability: "false",
   },
   {
-    id: 9,
     name: "Learn and Master Git & Github from zero to Hero",
     folderid: "1WYHVMilPj_NPwcWhRodjY82gzMbuGOf6",
-    apikey: "AIzaSyBCHCqjPT5dn9x8M_PCEeoKSaLBu8CWRy4",
     img: GitGitHub,
-    availability: true,
   },
   {
-    id: 10,
     name: "The Generative AI Full Stack for Beginners and Pro Level",
     folderid: "15zJkHsgUUvWXPd1-Pilvs60ylLjJF302",
-    apikey: "AIzaSyBCHCqjPT5dn9x8M_PCEeoKSaLBu8CWRy4",
     img: Generative_AI,
-    availability: true,
   },
   {
-    id: 11,
     name: "Ethical Hacking With JavaScript",
     folderid: "171YUEODao0mbZ3t0gwDlBn6UyWD4TGOH",
-    apikey: "AIzaSyBCHCqjPT5dn9x8M_PCEeoKSaLBu8CWRy4",
     img: EthicalHacking_JS,
-    availability: true,
   },
   {
-    id: 12,
     name: "Ultimate AWS Certified Solutions Architect Associate SAA-C03",
     folderid: "1R41m-1RWAsAeoYe5BPsbys42-OdEvXWY",
-    apikey: "AIzaSyBCHCqjPT5dn9x8M_PCEeoKSaLBu8CWRy4",
     img: AWA_C03,
-    availability: true,
   },
   {
-    id: 13,
     name: "Coursera Generative AI For Everyone FCO",
     folderid: "1QZSEhceF7_y8t6T5mt_o0GY4gUISVdLF",
-    apikey: "AIzaSyBCHCqjPT5dn9x8M_PCEeoKSaLBu8CWRy4",
     img: Generative_AI,
-    availability: true,
   },
 ];
+
+export const Courses = course
+  .sort((a, b) => a.name.charCodeAt() - b.name.charCodeAt())
+  .map((e, index) => {
+    return {
+      id: index + 1,
+      name: e.name,
+      folderid: e.folderid,
+      apikey: e.apikey || apikey,
+      img: e.img,
+      availability: e.availability === "false" ? false : true,
+    };
+  });

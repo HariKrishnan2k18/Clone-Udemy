@@ -84,7 +84,6 @@ function RegisterPage({ setRegister }) {
         onClick={() => {
           setRegister(false);
         }}
-        style={isMobile && { justifyContent: "unset", paddingTop: "80px" }}
         onSubmit={handleSubmit(onSubmit)}
       >
         <InnerForm onClick={(event) => event.stopPropagation()}>
