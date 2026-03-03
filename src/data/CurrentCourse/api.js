@@ -17,3 +17,10 @@ export const getRegisterData = async ({ payload }) => {
     .then((res) => res.data);
   return response;
 };
+
+export const getCourseDetails = async () => {
+  const response = axios
+    .get(`${API_URL}/coursedetails/list`)
+    .then((res) => res.data);
+  return response;
+};

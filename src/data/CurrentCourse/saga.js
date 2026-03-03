@@ -1,6 +1,14 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { loadUser, storeUser, errorUser, loadUserRegister } from "./index";
-import { getRegisterData, getUserData } from "./api";
+import {
+  loadUser,
+  storeUser,
+  errorUser,
+  loadUserRegister,
+  loadCourseDetails,
+  storeCourseDetails,
+  errorCourse,
+} from "./index";
+import { getCourseDetails, getRegisterData, getUserData } from "./api";
 import toast from "react-hot-toast";
 
 function* fetchDataSaga({ payload }) {
@@ -27,7 +35,23 @@ function* fetchRegisterData({ payload }) {
   }
 }
 
+function* fetchCourseData({ payload }) {
+  try {
+    const data = yield call(getCourseDetails);
+    if (data) {
+      yield put(storeCourseDetails(data));
+      sessionStorage.setItem("courseDetails", JSON.stringify(data));
+      toast.success("Successfully get Courses List !!");
+    } else {
+      yield put(errorCourse(data.message));
+    }
+  } catch (error) {
+    yield put(errorCourse(error.message));
+  }
+}
+
 export function* watchFetchUserSaga() {
   yield takeLatest(loadUser.type, fetchDataSaga);
   yield takeLatest(loadUserRegister.type, fetchRegisterData);
+  yield takeLatest(loadCourseDetails.type, fetchCourseData);
 }

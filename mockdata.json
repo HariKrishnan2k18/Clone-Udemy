@@ -1,0 +1,50 @@
+{
+  "_id": {
+    "$oid": "67ac403fd24b9ba0ce69e903"
+  },
+  "users": [
+    {
+      "id": "1",
+      "FirstName": "Hari",
+      "LastName": "Harikrishnan",
+      "user": "Hari",
+      "Email": "harikrishnan8102001@gmail.com",
+      "Country": "India",
+      "Number": "9384987128",
+      "password": "Hari",
+      "courses": [
+        {
+          "id": "1",
+          "courseName": "Coursera Generative AI For Everyone FCO",
+          "info": {
+            "id": "1",
+            "folderId": "1-euyJoqBMjMYk8VEoOZH-PzQ4cqh_386",
+            "folderName": "10 Searching Algorithms",
+            "contentId": "1NaPENoQp0ul-11fhRD-GQUZgZgMMqGxE",
+            "contentName": "056 Intro to Searching.mp4",
+            "contentType": "video/mp4",
+            "selected": true,
+            "subFolders": {
+              "id": "2",
+              "folderId": "1-euyJoqBMjMYk8VEoOZH-PzQ4cqh_386",
+              "folderName": "10 Searching Algorithms",
+              "contentId": null,
+              "contentName": null,
+              "contentType": null,
+              "selected": true,
+              "subFolders": {
+                "id": "3",
+                "folderId": "1-euyJoqBMjMYk8VEoOZH-PzQ4cqh_386",
+                "folderName": "10 Searching Algorithms",
+                "contentId": "1NaPENoQp0ul-11fhRD-GQUZgZgMMqGxE",
+                "contentName": "056 Intro to Searching.mp4",
+                "contentType": "video/mp4",
+                "selected": true
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

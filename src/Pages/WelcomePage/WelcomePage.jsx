@@ -14,8 +14,11 @@ import {
   SignupButton,
   NavBarMobile,
 } from "./styled.components";
-import { Courses } from "../../Courses/Courses";
-import { storeCourse } from "../../data/CurrentCourse";
+import {
+  storeCourse,
+  loadCourseDetails,
+  storeCourseDetails,
+} from "../../data/CurrentCourse";
 import { useEffect, useState } from "react";
 import { FourSquare } from "react-loading-indicators";
 import LoginPage from "../LoginPage/Login";
@@ -24,19 +27,29 @@ import { LoadingDiv } from "../../Component/CoursePlayer/styled.components";
 import { FaSearch, FaUserLock, FaUserPlus } from "react-icons/fa";
 import { isMobile } from "react-device-detect";
 import RegisterPage from "../RegisterPage";
+import { isEmpty } from "lodash";
 
 function WelcomePage() {
   const dispatch = useDispatch();
-  const { user, loadingUser } = useSelector((s) => s.currentCourse);
+  const {
+    user,
+    loadingUser,
+    courseDetails: getCourse,
+  } = useSelector((s) => s.currentCourse);
   const { themeDark } = useSelector((s) => s.theme);
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [mobileInput, setMobileInput] = useState(false);
-
+  const details = JSON.parse(sessionStorage.getItem("courseDetails"));
+  const courseDetails = !isEmpty(getCourse) ? getCourse : details || [];
   useEffect(() => {
-    dispatch(storeCourse({}));
-  }, []);
+    if (details) {
+      storeCourseDetails(details);
+    } else {
+      dispatch(loadCourseDetails({}));
+    }
+  }, [details]);
 
   if (loadingUser) {
     return (
@@ -138,37 +151,38 @@ function WelcomePage() {
         </span>
       </p>
       <CourseContainer>
-        {Courses.filter((e) => e.name.toLowerCase().includes(inputValue)).map(
-          (course) => (
-            <CardContainer key={course.id}>
-              <img src={course.img} alt="img" width={"100%"} height={"200px"} />
-              <CourseName>{course.name}</CourseName>
-              <StartCourseButton
-                to="/course"
-                availability={course.availability.toString()}
-                onClick={(e) => {
-                  dispatch(storeCourse(course));
-                  if (course.availability && user.user) {
-                    dispatch(
-                      fetchDataRequest({
-                        FOLDER_ID: course.folderid,
-                        API_KEY: course.apikey,
-                      })
-                    );
-                  } else if (!user?.user) {
-                    e.preventDefault();
-                    setLogin(true);
-                  } else {
-                    e.preventDefault();
-                    alert("course unavailable");
-                  }
-                }}
-              >
-                Start Course
-              </StartCourseButton>
-            </CardContainer>
-          )
-        )}
+        {courseDetails.length > 0 &&
+          courseDetails
+            .filter((e) => e.name.toLowerCase().includes(inputValue))
+            .map((course) => (
+              <CardContainer key={course.id}>
+                <img
+                  src={`data:image/jpeg;base64,${course.image}`}
+                  alt={course.name}
+                  width={"100%"}
+                  height={"200px"}
+                />
+                <CourseName>{course.name}</CourseName>
+                <StartCourseButton
+                  to="/course"
+                  onClick={(e) => {
+                    dispatch(storeCourse(course));
+                    if (user.user) {
+                      dispatch(
+                        fetchDataRequest({
+                          FOLDER_ID: course.id,
+                        })
+                      );
+                    } else if (!user?.user) {
+                      e.preventDefault();
+                      setLogin(true);
+                    }
+                  }}
+                >
+                  Start Course
+                </StartCourseButton>
+              </CardContainer>
+            ))}
       </CourseContainer>
     </Container>
   );

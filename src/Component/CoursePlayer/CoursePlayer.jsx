@@ -38,14 +38,15 @@ const VideoPlayer = () => {
   useEffect(() => {
     if (isEmpty(course)) {
       navigate("/");
-    } else {
+    } else if (Array.isArray(data)) {
       const subFolders =
         data &&
         data.filter(
-          (file) => file.mimeType === "application/vnd.google-apps.folder"
+          (file) => file.mimeType === "application/vnd.google-apps.folder",
         );
       const videos =
         data && data.filter((file) => file.mimeType === "video/mp4");
+
       setSubFolders(sortName(subFolders));
       setVideos(videos);
     }
@@ -80,14 +81,14 @@ const VideoPlayer = () => {
       }
     } else if (
       ["application/octet-stream", "text/javascript", "text/x-url"].includes(
-        video.mimeType
+        video.mimeType,
       )
     ) {
       setVideoOnload(true);
       setCurrentVideo({});
       try {
         const res = await axios.get(
-          `https://www.googleapis.com/drive/v3/files/${video.id}?alt=media&key=${course.apikey}`
+          `https://www.googleapis.com/drive/v3/files/${video.id}?alt=media&key=${course.apikey}`,
         );
         setHtml(res.data);
       } catch (error) {
@@ -122,7 +123,7 @@ const VideoPlayer = () => {
           },
         });
         const modifiedContent = subFolderVideos.filter(
-          (e) => e.mimeType !== "application/octet-stream"
+          (e) => e.mimeType !== "application/octet-stream",
         );
         setVideos(sortName(modifiedContent));
         setVideoLoading(false);
@@ -179,7 +180,7 @@ const VideoPlayer = () => {
                   : {
                       src: `https://drive.google.com/file/d/${currentVideo?.id}/preview`,
                     })}
-                title={currentVideo.name}
+                title={currentVideo?.name}
                 onLoad={() => setVideoOnload(false)}
                 height={isMobile ? "350px" : "500px"}
                 style={{
@@ -197,7 +198,7 @@ const VideoPlayer = () => {
           </div>
         ) : (
           <img
-            src={course?.img}
+            src={`data:image/jpeg;base64,${course.image}`}
             alt="img"
             width={"100%"}
             height={isMobile ? "350px" : "500px"}
@@ -217,7 +218,7 @@ const VideoPlayer = () => {
                   <b style={{ marginTop: "10px" }}>
                     {currentSubFolder?.name &&
                       ` ${cleanFileName(
-                        currentSubFolder?.name
+                        currentSubFolder?.name,
                       )} > ${cleanFileName(currentVideo?.name)}`}
                   </b>
                 )}

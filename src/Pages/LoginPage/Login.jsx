@@ -31,17 +31,15 @@ function LoginPage({ setLogin }) {
   };
   useEffect(() => {
     if (user?.id) {
-      if (!isEmpty(course) && course.availability) {
+      if (!isEmpty(course)) {
         dispatch(
           fetchDataRequest({
             FOLDER_ID: course.folderid,
             API_KEY: course.apikey,
           })
         );
-        navigate("/course");
-      } else if (!isEmpty(course)) {
-        alert("course unavailable");
         setLogin(false);
+        navigate("/course");
       } else {
         setLogin(false);
       }

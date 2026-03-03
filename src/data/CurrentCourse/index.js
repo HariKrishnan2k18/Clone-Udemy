@@ -6,6 +6,9 @@ const initialState = {
   loadingUser: false,
   loadingRegister: true,
   errorUser: "",
+  loadingCourseDetails: false,
+  courseDetails: [],
+  errorCourseDetails: "",
 };
 
 const subFolderSlice = createSlice({
@@ -13,19 +16,31 @@ const subFolderSlice = createSlice({
   initialState,
   reducers: {
     resetUser: () => initialState,
+    loadCourseDetails: (state, action) => {
+      state.loadingCourseDetails = true;
+    },
+    storeCourseDetails: (state, action) => {
+      state.loadingCourseDetails = false;
+      state.courseDetails = action.payload;
+      state.user = {};
+    },
+    errorCourse: (state, action) => {
+      state.loadingCourseDetails = false;
+      state.errorCourseDetails = "API Failure";
+    },
     loadUser: (state, action) => {
       state.loadingUser = true;
     },
     loadUserRegister: (state, action) => {
       state.loadingRegister = true;
     },
-    storeCourse: (state, action) => {
-      state.course = action.payload;
-    },
     storeUser: (state, action) => {
       state.loadingUser = false;
       state.loadingRegister = false;
       state.user = action.payload;
+    },
+    storeCourse: (state, action) => {
+      state.course = action.payload;
     },
     errorUser: (state, action) => {
       state.loadingUser = false;
@@ -42,6 +57,9 @@ export const {
   loadUser,
   resetUser,
   loadUserRegister,
+  loadCourseDetails,
+  storeCourseDetails,
+  errorCourse,
 } = subFolderSlice.actions;
 
 export default subFolderSlice.reducer;

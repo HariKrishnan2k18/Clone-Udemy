@@ -12,7 +12,6 @@ export const fetchApiData = async ({ payload }) => {
   const response = axios
     .post(`${API_URL}/coursedetails`, {
       folderId: payload.FOLDER_ID,
-      apiKey: payload.API_KEY,
     })
     .then((res) => res.data);
   return response;

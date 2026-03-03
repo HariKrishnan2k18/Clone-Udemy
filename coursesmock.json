@@ -1,0 +1,46 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "courseName": "Coursera Generative AI For Everyone FCO",
+      "contentDetails": [
+        {
+          "id": 1,
+          "folderId": "1-euyJoqBMjMYk8VEoO",
+          "folderName": "10 Searching Algorithms",
+          "isOpen": true,
+          "content": [
+            {
+              "id": "1NaPENoQp0ul-11fhRD-GQUZgZgMMqGxE",
+              "name": "056 Intro to Searching.mp4",
+              "type": "video/mp4",
+              "selected": true
+            },
+            {
+              "id": "1NaPENoQp0ul-11fhRD-GQUZgZgMMqGxE",
+              "name": "056 Intro to Searching.mp4",
+              "type": "folder",
+              "selected": true,
+              "subfolders": [
+                {
+                  "id": 2,
+                  "folderId": "1-euyJoqBMjMYk8VEoO",
+                  "folderName": "10 Searching Algorithms",
+                  "isOpen": true,
+                  "content": [
+                    {
+                      "id": "1NaPENoQp0ul-11fhRD-GQUZgZgMMqGxE",
+                      "name": "056 Intro to Searching.mp4",
+                      "type": "video/mp4",
+                      "selected": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
